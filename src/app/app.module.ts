@@ -8,6 +8,8 @@ import { RegisterComponent } from './themes/register/register.component';
 import { ResultComponent } from './themes/result/result.component';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './routers/app-routing/app-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { LogoutComponent } from './themes/logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -15,14 +17,11 @@ import { AppRoutingModule } from './routers/app-routing/app-routing.module';
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    ResultComponent
+    ResultComponent,
+    LogoutComponent,
   ],
-  imports: [
-    BrowserModule,
-    RouterModule,
-    AppRoutingModule
-  ],
+  imports: [BrowserModule, RouterModule, AppRoutingModule, ReactiveFormsModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
