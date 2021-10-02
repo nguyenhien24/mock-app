@@ -10,6 +10,8 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './routers/app-routing/app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LogoutComponent } from './themes/logout/logout.component';
+import { HttpClientModule } from '@angular/common/http';
+import { QuestionComponent } from './shared/question/question.component';
 
 @NgModule({
   declarations: [
@@ -19,8 +21,9 @@ import { LogoutComponent } from './themes/logout/logout.component';
     RegisterComponent,
     ResultComponent,
     LogoutComponent,
+    QuestionComponent,
   ],
-  imports: [BrowserModule, RouterModule, AppRoutingModule, ReactiveFormsModule],
+  imports: [BrowserModule, RouterModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
 })

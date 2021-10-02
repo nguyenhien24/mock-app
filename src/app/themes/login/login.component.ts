@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +15,11 @@ export class LoginComponent implements OnInit {
     userName: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
   });
-  constructor(private router: Router) {
+  constructor(private router: Router, private http: HttpClient) {
+    const user = this.http.get(
+      'http://localhost:3000/v1/users/6143792f985da81320c63caf'
+    );
+    // console.log('gg', user);
     const isLogged = localStorage.getItem('isLogged');
     if (isLogged === '1') {
       this.router.navigate(['']);

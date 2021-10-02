@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+    />
+    <title>Quiz App</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="d-flex justify-content-center">
+        <nav class="pagination">
+          <a
+            [ngClass]="{ disabled: order == 1 }"
+            [routerLink]="['/question']"
+            [queryParams]="this.previous"
+            >Previous</a
+          >
+          <a
+            [ngClass]="{ active: order == 1 }"
+            [routerLink]="['/question']"
+            [queryParams]="{ order: 1 }"
+            >1</a
+          >
+          <a
+            [ngClass]="{ active: order == 2 }"
+            [routerLink]="['/question']"
+            [queryParams]="{ order: 2 }"
+            >2</a
+          >
+          <a
+            [ngClass]="{ active: order == 3 }"
+            [routerLink]="['/question']"
+            [queryParams]="{ order: 3 }"
+            >3</a
+          >
+          <a
+            [ngClass]="{ active: order == 4 }"
+            [routerLink]="['/question']"
+            [queryParams]="{ order: 4 }"
+            >4</a
+          >
+          <a
+            [ngClass]="{ disabled: order == 4 }"
+            [routerLink]="['/question']"
+            [queryParams]="this.next"
+          >
+            Next
+          </a>
+        </nav>
+      </div>
+      <div class="quiz-container" id="quiz">
+        <div class="quiz-header">
+          <h2 id="question">Question</h2>
+          <div class="question-body">
+            <div class="question-content">
+              Question {{ order }}: {{ question.question }}
+            </div>
+
+            <ul>
+              <li>
+                <input
+                  type="checkbox"
+                  id="answer1"
+                  name="answer"
+                  class="answer"
+                  value="answer1"
+                />
+                <label for="answer1" id="1_text"> {{ question.answer1 }}</label>
+              </li>
+
+              <li>
+                <input
+                  type="checkbox"
+                  id="answer2"
+                  name="answer"
+                  class="answer"
+                  value="answer2"
+                />
+                <label for="answer2" id="2_text"> {{ question.answer2 }}</label>
+              </li>
+
+              <li>
+                <input
+                  type="checkbox"
+                  id="answer3"
+                  name="answer"
+                  class="answer"
+                  value="answer3"
+                />
+                <label for="answer3" id="3_text"> {{ question.answer3 }}</label>
+              </li>
+
+              <li>
+                <input
+                  type="checkbox"
+                  id="answer4"
+                  name="answer"
+                  class="answer"
+                  value="answer4"
+                />
+                <label for="answer4" id="4_text"> {{ question.answer4 }}</label>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <button id="submit">Submit</button>
+      </div>
+    </div>
+
+    <!-- <div class="next-button-container">
+  <button onclick="handleNextQuestion()">Next Question</button>
+</div>
+ <div class="start_btn"><button>Start Quiz</button></div>
+<div class="info_box">
+<div class="butttons">
+  <button class="quit"><button></button>Exit Quiz</button></div>
+  </div> -->
+  </body>
+</html>

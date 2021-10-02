@@ -2,9 +2,10 @@
 
 html,
 body {
-  background-image: url("/assets/snow-moutain-2.jpg");
-  background-size: cover;
+  background-image: url("/assets/snow-moutain-1.jpg");
+  background-position: center;
   background-repeat: no-repeat;
+  background-size: cover;
   height: 100vh;
   font-family: "Numans", sans-serif;
 }
