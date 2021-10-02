@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { APIService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-login',
@@ -15,10 +14,7 @@ export class LoginComponent implements OnInit {
     userName: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
   });
-  constructor(private router: Router, private http: HttpClient) {
-    const user = this.http.get(
-      'http://localhost:3000/v1/users/6143792f985da81320c63caf'
-    );
+  constructor(private router: Router, private apiService: APIService) {
     // console.log('gg', user);
     const isLogged = localStorage.getItem('isLogged');
     if (isLogged === '1') {
@@ -29,16 +25,18 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit() {
-    const user = JSON.parse(localStorage.getItem('user') ?? '');
-    console.log(this.loginForm.value, user);
-    if (
-      this.loginForm.value.userName === user.userName &&
-      this.loginForm.value.password === user.password
-    ) {
-      localStorage.setItem('isLogged', '1');
-      this.router.navigate(['']);
-    } else {
-      this.loginFail = true;
-    }
+    console.log('call onSubmit');
+    this.apiService.login('tuandoan2', 'tuandoan2604');
+    // const user = JSON.parse(localStorage.getItem('user') ?? '');
+    // console.log(this.loginForm.value, user);
+    // if (
+    //   this.loginForm.value.userName === user.userName &&
+    //   this.loginForm.value.password === user.password
+    // ) {
+    //   localStorage.setItem('isLogged', '1');
+    //   this.router.navigate(['']);
+    // } else {
+    //   this.loginFail = true;
+    // }
   }
 }

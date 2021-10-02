@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LogoutComponent } from './themes/logout/logout.component';
 import { HttpClientModule } from '@angular/common/http';
 import { QuestionComponent } from './shared/question/question.component';
+import { APIService } from './services/api.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { QuestionComponent } from './shared/question/question.component';
     QuestionComponent,
   ],
   imports: [BrowserModule, RouterModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule],
-  providers: [],
+  providers: [APIService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
