@@ -25,18 +25,21 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit() {
-    console.log('call onSubmit');
-    this.apiService.login('tuandoan2', 'tuandoan2604');
-    // const user = JSON.parse(localStorage.getItem('user') ?? '');
-    // console.log(this.loginForm.value, user);
-    // if (
-    //   this.loginForm.value.userName === user.userName &&
-    //   this.loginForm.value.password === user.password
-    // ) {
-    //   localStorage.setItem('isLogged', '1');
-    //   this.router.navigate(['']);
-    // } else {
-    //   this.loginFail = true;
-    // }
+    // console.log('call onSubmit');
+    this.apiService
+      .login(this.loginForm.value.userName, this.loginForm.value.password)
+      .subscribe(
+        (res: any) => {
+          localStorage.setItem(
+            'access_token',
+            JSON.stringify(res.tokens.access)
+          ); //res.tokens trả về là 1 obj nhưng localStorage chỉ lưu đc dưới dạng string nên phải encode obj thành json
+          this.router.navigate(['/question']);
+        },
+        (err) => {
+          this.loginFail = true;
+        }
+      );
+    const user = JSON.parse(localStorage.getItem('user') ?? '');
   }
 }

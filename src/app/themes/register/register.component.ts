@@ -21,10 +21,16 @@ export class RegisterComponent implements OnInit {
     rePassword: new FormControl(''),
   });
   onSubmit() {
-    this.apiService.register(
-      this.signUpForm.value.userName,
-      this.signUpForm.value.password
-    );
+    this.apiService
+      .register(this.signUpForm.value.userName, this.signUpForm.value.password)
+      .subscribe(
+        (res) => {
+          this.router.navigate(['login']);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
   }
 
   constructor(private router: Router, private apiService: APIService) {

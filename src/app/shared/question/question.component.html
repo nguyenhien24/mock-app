@@ -14,7 +14,27 @@
   </head>
   <body>
     <div class="container">
-      <div class="d-flex justify-content-center">
+      <div *ngIf="!question" class="result quiz-container justify-content-center">
+        <div>Result : {{ pecentCorrect }} %</div>
+        <br />
+        <div>
+          <ul>
+            <li *ngFor="let result of results; let i = index">
+              <div *ngIf="i !== 0">
+                <div>
+                  Question {{ i }}: {{ result.isCorrect ? "Correct" : "Wrong" }}
+                </div>
+                <div>Your answer: {{ result.answer }}</div>
+                <div *ngIf="!result.isCorrect">
+                  Correct answer: {{ result.correctAnswer }}
+                </div>
+                <br />
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div *ngIf="question" class="d-flex justify-content-center">
         <nav class="pagination">
           <a
             [ngClass]="{ disabled: order == 1 }"
@@ -55,63 +75,74 @@
           </a>
         </nav>
       </div>
-      <div class="quiz-container" id="quiz">
-        <div class="quiz-header">
-          <h2 id="question">Question</h2>
-          <div class="question-body">
-            <div class="question-content">
-              Question {{ order }}: {{ question.question }}
+      <form *ngIf="question" [formGroup]="questionForm" (ngSubmit)="onSubmit()">
+        <div class="quiz-container" id="quiz">
+          <div class="quiz-header">
+            <h2 id="question">Question</h2>
+
+            <div class="question-body">
+              <div class="question-content">
+                Question {{ order }}: {{ question.question }}
+              </div>
+
+              <ul>
+                <li>
+                  <input
+                    formControlName="answer1"
+                    type="checkbox"
+                    id="answer1"
+                    class="answer"
+                    [value]="question.answer1"
+                  />
+                  <label for="answer1" id="1_text">
+                    {{ question.answer1 }}</label
+                  >
+                </li>
+
+                <li>
+                  <input
+                    type="checkbox"
+                    id="answer2"
+                    formControlName="answer2"
+                    class="answer"
+                    [value]="question.answer2"
+                  />
+                  <label for="answer2" id="2_text">
+                    {{ question.answer2 }}</label
+                  >
+                </li>
+
+                <li>
+                  <input
+                    type="checkbox"
+                    id="answer3"
+                    formControlName="answer3"
+                    class="answer"
+                    [value]="question.answer3"
+                  />
+                  <label for="answer3" id="3_text">
+                    {{ question.answer3 }}</label
+                  >
+                </li>
+
+                <li>
+                  <input
+                    type="checkbox"
+                    id="answer4"
+                    formControlName="answer4"
+                    class="answer"
+                    [value]="question.answer4"
+                  />
+                  <label for="answer4" id="4_text">
+                    {{ question.answer4 }}</label
+                  >
+                </li>
+              </ul>
             </div>
-
-            <ul>
-              <li>
-                <input
-                  type="checkbox"
-                  id="answer1"
-                  name="answer"
-                  class="answer"
-                  value="answer1"
-                />
-                <label for="answer1" id="1_text"> {{ question.answer1 }}</label>
-              </li>
-
-              <li>
-                <input
-                  type="checkbox"
-                  id="answer2"
-                  name="answer"
-                  class="answer"
-                  value="answer2"
-                />
-                <label for="answer2" id="2_text"> {{ question.answer2 }}</label>
-              </li>
-
-              <li>
-                <input
-                  type="checkbox"
-                  id="answer3"
-                  name="answer"
-                  class="answer"
-                  value="answer3"
-                />
-                <label for="answer3" id="3_text"> {{ question.answer3 }}</label>
-              </li>
-
-              <li>
-                <input
-                  type="checkbox"
-                  id="answer4"
-                  name="answer"
-                  class="answer"
-                  value="answer4"
-                />
-                <label for="answer4" id="4_text"> {{ question.answer4 }}</label>
-              </li>
-            </ul>
           </div>
+          <button id="submit">Submit</button>
         </div>
-        <button id="submit">Submit</button>
-      </div>
+      </form>
     </div>
 
     <!-- <div class="next-button-container">
