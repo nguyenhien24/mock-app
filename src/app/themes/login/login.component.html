@@ -20,6 +20,19 @@
           (ngSubmit)="onSubmit()"
           class="login-form"
         >
+        <!-- <input type="text" placeholder="email" formControlName="userEmail" />
+          <div
+            class="text-danger mb-3"
+            *ngIf="
+              loginForm['controls'].userEmail.invalid &&
+              loginForm['controls'].userEmail.touched
+            "
+          >
+          </div>
+          <div *ngIf="loginForm['controls'].userEmail.errors?.required">
+            User name is required.
+          </div> -->
+
           <input type="text" placeholder="name" formControlName="userName" />
           <div
             class="text-danger mb-3"

@@ -39,6 +39,21 @@
               User name must be at least 6 characters long.
             </div>
           </div>
+          <input type="text" placeholder="email" formControlName="email" />
+          <div
+            class="text-danger mb-3"
+            *ngIf="
+              signUpForm['controls'].email.invalid &&
+              signUpForm['controls'].email.touched
+            "
+          >
+            <div *ngIf="signUpForm['controls'].email.errors?.required">
+              Email is required.
+            </div>
+            <div *ngIf="signUpForm['controls'].email.errors?.pattern">
+              Email is incorrect format.
+            </div>
+          </div>
           <input
             type="password"
             placeholder="password"

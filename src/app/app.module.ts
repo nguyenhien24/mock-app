@@ -10,9 +10,10 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './routers/app-routing/app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LogoutComponent } from './themes/logout/logout.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { QuestionComponent } from './shared/question/question.component';
 import { APIService } from './services/api.service';
+import { RefreshTokenInterceptor } from './interceptors/refresh-token.interceptor';
 
 @NgModule({
   declarations: [
@@ -24,8 +25,21 @@ import { APIService } from './services/api.service';
     LogoutComponent,
     QuestionComponent,
   ],
-  imports: [BrowserModule, RouterModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule],
-  providers: [APIService],
+  imports: [
+    BrowserModule,
+    RouterModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+  ],
+  providers: [
+    APIService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RefreshTokenInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

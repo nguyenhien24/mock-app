@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { APIService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-question',
@@ -11,6 +12,7 @@ export class QuestionComponent implements OnInit {
   order: any;
   previous: any;
   next: any;
+  questions: any;
   question: any;
   pecentCorrect: any;
   questionForm = new FormGroup({
@@ -20,7 +22,15 @@ export class QuestionComponent implements OnInit {
     answer4: new FormControl(''),
   });
   results: any[] = [];
-  constructor(private router: Router, private route: ActivatedRoute) {
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private apiService: APIService
+  ) {
+    this.apiService.getQuestions().subscribe((res: any) => {
+      this.questions = res.sendQuestion;
+    });
+
     this.route.queryParams.subscribe((params) => {
       this.order = params['order'] ?? 1;
       this.questionForm.reset();
@@ -33,50 +43,10 @@ export class QuestionComponent implements OnInit {
 
   ngDoCheck() {
     // console.log(localStorage.getItem('token'));]
-   
-    const questions = [
-      {
-        _id: '612c8029415565e43028b2ed',
-        question: 'How many people are there ?',
-
-        answer1: 'I think !',
-        answer2: 'Fighting !',
-        answer3: "No, It isn't",
-        answer4: 'There are 4 people.',
-        correctanswer: 'There are 4 people.',
-      },
-      {
-        _id: '612c8039415565e43028b2f0',
-        question: 'What are you doing ?',
-        answer1: 'I am going to FPT',
-        answer2: 'Here !',
-        answer3: 'Yes, I am',
-        answer4: 'Say oh yeah !',
-        correctanswer: 'I am going to FPT',
-      },
-      {
-        _id: '612c808b415565e43028b2f5',
-        question: 'What time is it???',
-        answer1: "I don't know",
-        answer2: 'Right !',
-        answer3: "No, It isn't",
-        answer4: '12:30',
-        correctanswer: '12:30',
-      },
-      {
-        _id: '612c80c2415565e43028b2fa',
-        question: 'How are you ?',
-        answer1: "I don't know",
-        answer2: "I'm fine. Thank !",
-        answer3: 'No problem ',
-        answer4: 'Sure !',
-        correctanswer: "I'm fine. Thank !",
-      },
-    ];
     this.next = { order: Number(this.order) + 1 };
     this.previous = { order: Number(this.order) - 1 };
     const index = Number(this.order) - 1; // cau hoi 1 nhung nam o vtri 0 cua mang
-    this.question = questions[index];
+    this.question = this.questions ? this.questions[index] : null;
     // console.log(this.results?.[2]);
   }
 
